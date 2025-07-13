@@ -63,7 +63,12 @@ export const exercise2 = DatabaseLayer.pipe(Layer.provide(ConfigLayer))
 // Target: Layer<"Cache", "CacheError" | "DbError" | "ConfigError", never>
 
 export const exercise3 = CacheLayer.pipe(
-  Layer.provide(DatabaseLayer.pipe(Layer.provide(ConfigLayer))),
+  Layer.provide(
+    DatabaseLayer.pipe(
+      Layer.provide(DatabaseLayer),
+      Layer.provide(ConfigLayer),
+    ),
+  ),
 )
 
 // ===========================
@@ -72,7 +77,7 @@ export const exercise3 = CacheLayer.pipe(
 
 // Target: Layer<"Auth", "AuthError" | "ConfigError" | "DbError", never>
 
-export const exercise4 = null // Your solution here
+export const exercise4 = AuthLayer.pipe(Layer.provide(ConfigLayer))
 
 // ===========================
 // Exercise 5
