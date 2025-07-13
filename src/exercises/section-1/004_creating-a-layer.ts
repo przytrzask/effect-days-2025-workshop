@@ -1,8 +1,19 @@
 // The shared service modules also export pre-defined constructors, given that
 // we don't need to know how the services are implemented to use them
-import { ImmunityTokenManager, makeImmunityTokenManager } from "./shared/services/ImmunityTokenManager.js"
-import { makePunDistributionNetwork, PunDistributionNetwork } from "./shared/services/PunDistributionNetwork.js"
-import { makePunsterClient, PunsterClient } from "./shared/services/PunsterClient.js"
+import { Layer } from "effect"
+import {
+  ImmunityTokenManager,
+  makeImmunityTokenManager,
+} from "./shared/services/ImmunityTokenManager.js"
+import {
+  makePunDistributionNetwork,
+  PunDistributionNetwork,
+} from "./shared/services/PunDistributionNetwork.js"
+import {
+  makePunsterClient,
+  PunsterClient,
+} from "./shared/services/PunsterClient.js"
+import { catchTag } from "@effect/platform/HttpRouter"
 
 /**
  * You have implemented service constructors for the three services in the
@@ -33,10 +44,16 @@ import { makePunsterClient, PunsterClient } from "./shared/services/PunsterClien
  */
 
 /* Uncomment the below to implement */
-// export const ImmunityTokenManagerLayer =
+export const ImmunityTokenManagerLayer = Layer.effect(
+  ImmunityTokenManager,
+  makeImmunityTokenManager,
+).pipe()
 
 /* Uncomment the below to implement */
-// export const PunsterClientLayer =
+export const PunsterClientLayer = Layer.effect(PunsterClient, makePunsterClient)
 
 /* Uncomment the below to implement */
-// export const PunDistributionNetworkLayer =
+export const PunDistributionNetworkLayer = Layer.effect(
+  PunDistributionNetwork,
+  makePunDistributionNetwork,
+)

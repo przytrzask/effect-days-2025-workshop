@@ -17,17 +17,26 @@ import { PunsterClient } from "./shared/services/PunsterClient.js"
 const testPun = Pun.make({
   setup: "The setup",
   punchline: "The punchline",
-  groanPotential: 0.5
+  groanPotential: 0.5,
 })
 
 const testEvaluation = "Pun Evaluation Report"
 
-export const main = Effect.gen(function*() {
-  const punster = yield* PunsterClient
-  yield* punster.createPun(Misbehavior.make({
-    childName: "Testy McTesterson",
-    category: "TestCategory",
-    description: "A test misbehavior",
-    severity: 1
-  }))
+export const punsterClient = PunsterClient.of({
+  createPun: () => Effect.succeed(testPun),
+  evaluatePun: () => Effect.succeed(testEvaluation),
 })
+
+export const main = Effect.gen(function* () {
+  const punster = yield* PunsterClient
+  yield* punster.createPun(
+    Misbehavior.make({
+      childName: "Testy McTesterson",
+      category: "TestCategory",
+      description: "A test misbehavior",
+      severity: 1,
+    }),
+  )
+}).pipe(Effect.provideService(PunsterClient, punsterClient))
+
+Effect.runPromise(main)

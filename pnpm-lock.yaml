@@ -40,8 +40,8 @@ importers:
         specifier: ^0.6.0
         version: 0.6.0
       '@effect/opentelemetry':
-        specifier: https://pkg.pr.new/Effect-TS/effect/@effect/opentelemetry@9a0dfa6
-        version: https://pkg.pr.new/Effect-TS/effect/@effect/opentelemetry@9a0dfa6(@effect/platform@0.80.8(effect@3.14.8))(@opentelemetry/api@1.9.0)(@opentelemetry/resources@2.0.0(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-metrics@2.0.0(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-trace-base@2.0.0(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-trace-node@2.0.0(@opentelemetry/api@1.9.0))(@opentelemetry/semantic-conventions@1.32.0)(effect@3.14.8)
+        specifier: ^0.48.2
+        version: 0.48.8(@effect/platform@0.80.8(effect@3.14.8))(@opentelemetry/api@1.9.0)(@opentelemetry/resources@2.0.0(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-metrics@2.0.0(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-trace-base@2.0.0(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-trace-node@2.0.0(@opentelemetry/api@1.9.0))(@opentelemetry/semantic-conventions@1.32.0)(effect@3.14.8)
       '@effect/platform':
         specifier: ^0.80.8
         version: 0.80.8(effect@3.14.8)
@@ -346,11 +346,10 @@ packages:
   '@effect/language-service@0.6.0':
     resolution: {integrity: sha512-qwoxzi3VogP5pYEu+GseK76FFUuktaiJCoFh13/Z2M6hoy45mSN1hvs1Y2JMNG9St7HHiarzQPxF14fGKwjTaQ==}
 
-  '@effect/opentelemetry@https://pkg.pr.new/Effect-TS/effect/@effect/opentelemetry@9a0dfa6':
-    resolution: {tarball: https://pkg.pr.new/Effect-TS/effect/@effect/opentelemetry@9a0dfa6}
-    version: 0.46.1
+  '@effect/opentelemetry@0.48.8':
+    resolution: {integrity: sha512-ZULA3TSLVx3ylcWcmwg5wHiDIMc+LWPxUQVEqE5I+PgqNcPuhk11DjLO+ZYPWbQ2nF7NsawMactNOVCZLMQa7Q==}
     peerDependencies:
-      '@effect/platform': ^0.80.8
+      '@effect/platform': ^0.82.8
       '@opentelemetry/api': ^1.9
       '@opentelemetry/resources': ^2.0.0
       '@opentelemetry/sdk-logs': '*'
@@ -358,9 +357,13 @@ packages:
       '@opentelemetry/sdk-trace-base': ^2.0.0
       '@opentelemetry/sdk-trace-node': ^2.0.0
       '@opentelemetry/sdk-trace-web': ^2.0.0
-      '@opentelemetry/semantic-conventions': ^1.30.0
-      effect: ^3.14.8
+      '@opentelemetry/semantic-conventions': ^1.33.0
+      effect: ^3.15.4
     peerDependenciesMeta:
+      '@opentelemetry/api':
+        optional: true
+      '@opentelemetry/resources':
+        optional: true
       '@opentelemetry/sdk-logs':
         optional: true
       '@opentelemetry/sdk-metrics':
@@ -4843,14 +4846,14 @@ snapshots:
 
   '@effect/language-service@0.6.0': {}
 
-  '@effect/opentelemetry@https://pkg.pr.new/Effect-TS/effect/@effect/opentelemetry@9a0dfa6(@effect/platform@0.80.8(effect@3.14.8))(@opentelemetry/api@1.9.0)(@opentelemetry/resources@2.0.0(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-metrics@2.0.0(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-trace-base@2.0.0(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-trace-node@2.0.0(@opentelemetry/api@1.9.0))(@opentelemetry/semantic-conventions@1.32.0)(effect@3.14.8)':
+  '@effect/opentelemetry@0.48.8(@effect/platform@0.80.8(effect@3.14.8))(@opentelemetry/api@1.9.0)(@opentelemetry/resources@2.0.0(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-metrics@2.0.0(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-trace-base@2.0.0(@opentelemetry/api@1.9.0))(@opentelemetry/sdk-trace-node@2.0.0(@opentelemetry/api@1.9.0))(@opentelemetry/semantic-conventions@1.32.0)(effect@3.14.8)':
     dependencies:
       '@effect/platform': 0.80.8(effect@3.14.8)
-      '@opentelemetry/api': 1.9.0
-      '@opentelemetry/resources': 2.0.0(@opentelemetry/api@1.9.0)
       '@opentelemetry/semantic-conventions': 1.32.0
       effect: 3.14.8
     optionalDependencies:
+      '@opentelemetry/api': 1.9.0
+      '@opentelemetry/resources': 2.0.0(@opentelemetry/api@1.9.0)
       '@opentelemetry/sdk-metrics': 2.0.0(@opentelemetry/api@1.9.0)
       '@opentelemetry/sdk-trace-base': 2.0.0(@opentelemetry/api@1.9.0)
       '@opentelemetry/sdk-trace-node': 2.0.0(@opentelemetry/api@1.9.0)

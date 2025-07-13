@@ -13,23 +13,23 @@ const __dirname = Path.dirname(__filename)
 
 export default tseslint.config(
   {
-    ignores: ["**/dist", "**/build", "**/docs", "**/*.md"]
+    ignores: ["**/dist", "**/build", "**/docs", "**/*.md"],
   },
   eslint.configs.recommended,
   tseslint.configs.strict,
   importPlugin.flatConfigs.recommended,
   importPlugin.flatConfigs.typescript,
-  effectEslint.configs.dprint,
+  // effectEslint.configs.dprint,
   {
     plugins: {
       "simple-import-sort": simpleImportSort,
-      "sort-destructure-keys": sortDestructureKeys
+      "sort-destructure-keys": sortDestructureKeys,
     },
 
     languageOptions: {
       parser: tseslint.parser,
       ecmaVersion: 2018,
-      sourceType: "module"
+      sourceType: "module",
     },
 
     settings: {
@@ -37,9 +37,9 @@ export default tseslint.config(
         name: "tsResolver",
         resolver: tsResolver,
         options: {
-          alwaysTryTypes: true
-        }
-      }
+          alwaysTryTypes: true,
+        },
+      },
     },
 
     rules: {
@@ -52,9 +52,10 @@ export default tseslint.config(
       "no-restricted-syntax": [
         "error",
         {
-          selector: "CallExpression[callee.property.name='push'] > SpreadElement.arguments",
-          message: "Do not use spread arguments in Array.push"
-        }
+          selector:
+            "CallExpression[callee.property.name='push'] > SpreadElement.arguments",
+          message: "Do not use spread arguments in Array.push",
+        },
       ],
 
       "no-unused-vars": "off",
@@ -76,8 +77,8 @@ export default tseslint.config(
         "warn",
         {
           default: "generic",
-          readonly: "generic"
-        }
+          readonly: "generic",
+        },
       ],
       "@typescript-eslint/ban-ts-comment": "off",
       "@typescript-eslint/ban-types": "off",
@@ -99,27 +100,27 @@ export default tseslint.config(
         "error",
         {
           argsIgnorePattern: "^_",
-          varsIgnorePattern: "^_"
-        }
+          varsIgnorePattern: "^_",
+        },
       ],
       "@typescript-eslint/no-use-before-define": "off",
       "@typescript-eslint/prefer-for-of": "off",
       "@typescript-eslint/unified-signatures": "off",
 
-      "@effect/dprint": [
-        "error",
-        {
-          config: {
-            indentWidth: 2,
-            lineWidth: 120,
-            semiColons: "asi",
-            quoteStyle: "alwaysDouble",
-            trailingCommas: "never",
-            operatorPosition: "maintain",
-            "arrowFunction.useParentheses": "force"
-          }
-        }
-      ]
-    }
-  }
+      // "@effect/dprint": [
+      //   "error",
+      //   {
+      //     config: {
+      //       indentWidth: 2,
+      //       lineWidth: 120,
+      //       semiColons: "asi",
+      //       quoteStyle: "alwaysDouble",
+      //       trailingCommas: "never",
+      //       operatorPosition: "maintain",
+      //       "arrowFunction.useParentheses": "force",
+      //     },
+      //   },
+      // ],
+    },
+  },
 )

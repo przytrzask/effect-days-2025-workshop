@@ -1,4 +1,4 @@
-import { Effect } from "effect"
+import { Effect, Console } from "effect"
 
 // A pre-defined list of misbehaviors
 import { misbehaviors } from "./fixtures/Misbehaviors.js"
@@ -33,6 +33,23 @@ import { PunsterClient } from "./shared/services/PunsterClient.js"
  *       - check `./fixtures/Misbehaviors.ts` to see the available children
  */
 
-export const main = Effect.gen(function*() {
-  // Your logic goes here
+export const main = Effect.gen(function* () {
+  const punDeliveryService = yield* PunDistributionNetwork
+  const punsterClientService = yield* PunsterClient
+
+  for (const misbehavior of misbehaviors) {
+    const channel = yield* punDeliveryService.getChannel(misbehavior)
+    yield* punsterClientService.createPun(misbehavior).pipe(
+      Effect.andThen((pun) =>
+        punDeliveryService.deliverPun(pun, misbehavior, channel),
+      ),
+      Effect.andThen((report) => Console.log(report)),
+      Effect.catchTags({
+        ChildImmuneError: () =>
+          Console.log(`Child ${misbehavior.childName} had an immunity token`),
+        PunsterFetchError: () =>
+          Console.error(`Failed to fetch pun from PUNSTER`),
+      }),
+    )
+  }
 })

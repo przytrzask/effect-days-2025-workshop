@@ -1,4 +1,4 @@
-import type { Layer } from "effect"
+import { Layer } from "effect"
 
 /**
  * **Todo List**:
@@ -23,10 +23,22 @@ export declare const DatabaseLayer: Layer.Layer<"Database", "DbError", "Config">
 export declare const LoggingLayer: Layer.Layer<"Logging", "LogError", "Config">
 export declare const ConfigLayer: Layer.Layer<"Config", "ConfigError", never>
 export declare const CacheLayer: Layer.Layer<"Cache", "CacheError", "Database">
-export declare const AuthLayer: Layer.Layer<"Auth", "AuthError", "Database" | "Config">
+export declare const AuthLayer: Layer.Layer<
+  "Auth",
+  "AuthError",
+  "Database" | "Config"
+>
 export declare const ApiLayer: Layer.Layer<"Api", "ApiError", "Auth" | "Cache">
-export declare const MetricsLayer: Layer.Layer<"Metrics", "MetricsError", "Logging">
-export declare const NotificationLayer: Layer.Layer<"Notification", "NotifyError", "Logging" | "Config">
+export declare const MetricsLayer: Layer.Layer<
+  "Metrics",
+  "MetricsError",
+  "Logging"
+>
+export declare const NotificationLayer: Layer.Layer<
+  "Notification",
+  "NotifyError",
+  "Logging" | "Config"
+>
 
 // ===========================
 // Exercise 1
@@ -34,7 +46,7 @@ export declare const NotificationLayer: Layer.Layer<"Notification", "NotifyError
 
 // Target: Layer<"Config" | "Logging", "ConfigError" | "LogError", never>
 
-export const exercise1 = null // Your solution here
+export const exercise1 = LoggingLayer.pipe(Layer.provideMerge(ConfigLayer))
 
 // ===========================
 // Exercise 2
@@ -42,7 +54,7 @@ export const exercise1 = null // Your solution here
 
 // Target: Layer<"Database", "DbError" | "ConfigError", never>
 
-export const exercise2 = null // Your solution here
+export const exercise2 = DatabaseLayer.pipe(Layer.provide(ConfigLayer))
 
 // ===========================
 // Exercise 3
@@ -50,7 +62,9 @@ export const exercise2 = null // Your solution here
 
 // Target: Layer<"Cache", "CacheError" | "DbError" | "ConfigError", never>
 
-export const exercise3 = null // Your solution here
+export const exercise3 = CacheLayer.pipe(
+  Layer.provide(DatabaseLayer.pipe(Layer.provide(ConfigLayer))),
+)
 
 // ===========================
 // Exercise 4
